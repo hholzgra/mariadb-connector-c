@@ -658,6 +658,8 @@ void run_tests(struct my_tests_st *test) {
     is_mariadb= mariadb_connection(mysql_default);
     if (!mysql_query(mysql_default, "SHOW VARIABLES LIKE 'have_ssl'"))
     {
+      MYSQL_RES *res;
+      MYSQL_ROW row;
       res= mysql_store_result(mysql_default);
       if ((row= mysql_fetch_row(res)))
         diag("TLS: %s", row[1]);
